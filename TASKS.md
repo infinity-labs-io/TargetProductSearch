@@ -17,3 +17,6 @@
 - Create service implementations
 - Setup dependencies
 - Create DB Seeder
+- Add error middleware
+- Add logging
+- Remove keys from response
