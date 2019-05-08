@@ -4,6 +4,8 @@ services:
     build: 
       context: .
       dockerfile: src/Services/InfinityLabs.Target.ProductSearch.Api/Dockerfile
+    environment: 
+      Mongo__ConnectionString: "mongodb://mongo:27017"
     ports: 
       - 8080:80
       - 8081:443
