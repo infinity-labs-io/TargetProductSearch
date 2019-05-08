@@ -4,7 +4,7 @@ using InfinityLabs.Target.ProductSearch.Api.Models;
 
 namespace InfinityLabs.Target.ProductSearch.Api.Services
 {
-    public class ProductService : IProductService
+    public class RedSkyProductService : IProductService
     {
         public Task<ProductInformation> GetByIdAsync(int id)
         {
