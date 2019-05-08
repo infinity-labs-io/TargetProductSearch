@@ -1,19 +1,32 @@
 using System;
 using System.Threading.Tasks;
 using InfinityLabs.Target.ProductSearch.Api.Models;
+using MongoDB.Driver;
 
 namespace InfinityLabs.Target.ProductSearch.Api.Services
 {
     public class MongoPricingService : IPricingService
     {
-        public Task<PricingInformation> GetByIdAsync(int id)
+        private readonly IMongoCollection<PricingInformation> _pricing;
+        
+        public MongoPricingService(IMongoConfiguration configuration)
         {
-            throw new NotImplementedException();
+            var connectionString = configuration.ConnectionString;
+            var dbName = configuration.DatabaseName;
+            var client = new MongoClient(connectionString);
+            var database = client.GetDatabase(dbName);
+            _pricing = database.GetCollection<PricingInformation>("Pricing");
+
+        }
+        
+        public async Task<PricingInformation> GetByIdAsync(int id)
+        {
+            return await _pricing.Find(p => p.Id == id).SingleOrDefaultAsync();
         }
 
-        public Task PutByIdAsync(int id, PricingInformation information)
+        public async Task PutByIdAsync(int id, PricingInformation information)
         {
-            throw new NotImplementedException();
+            await _pricing.ReplaceOneAsync(p => p.Id == id, information);
         }
     }
 }
