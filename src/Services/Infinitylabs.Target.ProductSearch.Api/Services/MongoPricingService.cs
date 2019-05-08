@@ -4,7 +4,7 @@ using InfinityLabs.Target.ProductSearch.Api.Models;
 
 namespace InfinityLabs.Target.ProductSearch.Api.Services
 {
-    public class PricingService : IPricingService
+    public class MongoPricingService : IPricingService
     {
         public Task<PricingInformation> GetByIdAsync(int id)
         {

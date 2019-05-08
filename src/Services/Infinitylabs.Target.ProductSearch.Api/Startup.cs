@@ -15,7 +15,7 @@ namespace Infinitylabs.Target.ProductSearch.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddScoped<IPricingService, PricingService>()
+                .AddScoped<IPricingService, MongoPricingService>()
                 .AddScoped<IProductPricingService, ProductPricingService>()
                 .AddScoped<IProductService, ProductService>();
         }
