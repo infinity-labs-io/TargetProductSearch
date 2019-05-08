@@ -24,14 +24,18 @@ namespace Infinitylabs.Target.ProductSearch.Api
         public void ConfigureServices(IServiceCollection services)
         {
             var config = new MongoConfiguration();
-            _configuration.Bind("Mongo", config); 
+            var redSkyConfig = new RedSkyConfiguration();
+            _configuration.Bind("Mongo", config);
+            _configuration.Bind("RedSky", redSkyConfig);
 
-            services.AddSingleton<IMongoConfiguration>(config);
+            services
+                .AddSingleton<IMongoConfiguration>(config)
+                .AddSingleton<IRedSkyConfiguration>(redSkyConfig);
             
             services
                 .AddScoped<IPricingService, MongoPricingService>()
                 .AddScoped<IProductPricingService, ProductPricingService>()
-                .AddScoped<IProductService, ProductService>();
+                .AddScoped<IProductService, RedSkyProductService>();
 
             services
                 .AddMvc();
