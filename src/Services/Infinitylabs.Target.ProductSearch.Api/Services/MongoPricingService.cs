@@ -11,7 +11,7 @@ namespace InfinityLabs.Target.ProductSearch.Api.Services
             throw new NotImplementedException();
         }
 
-        public Task PutByIdAsync(PricingInformation information)
+        public Task PutByIdAsync(int id, PricingInformation information)
         {
             throw new NotImplementedException();
         }

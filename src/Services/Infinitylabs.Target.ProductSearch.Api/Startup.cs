@@ -18,6 +18,9 @@ namespace Infinitylabs.Target.ProductSearch.Api
                 .AddScoped<IPricingService, MongoPricingService>()
                 .AddScoped<IProductPricingService, ProductPricingService>()
                 .AddScoped<IProductService, ProductService>();
+
+            services
+                .AddMvc();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -26,6 +29,10 @@ namespace Infinitylabs.Target.ProductSearch.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseMvc(routes => {
+                routes.MapRoute("default", "api/*");
+            });
         }
     }
 }

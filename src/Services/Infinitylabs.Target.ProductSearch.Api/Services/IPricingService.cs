@@ -7,6 +7,6 @@ namespace InfinityLabs.Target.ProductSearch.Api.Services
     {
         Task<PricingInformation> GetByIdAsync(int id);
 
-        Task PutByIdAsync(PricingInformation information);
+        Task PutByIdAsync(int id, PricingInformation information);
     }
 }
