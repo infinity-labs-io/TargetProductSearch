@@ -14,4 +14,6 @@
         - GetById
         - PutById
 - Create Endpoints
+- Create service implementations
+- Setup dependencies
 - Create DB Seeder
