@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using InfinityLabs.Target.ProductSearch.Api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -13,6 +14,10 @@ namespace Infinitylabs.Target.ProductSearch.Api
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services
+                .AddScoped<IPricingService, PricingService>()
+                .AddScoped<IProductPricingService, ProductPricingService>()
+                .AddScoped<IProductService, ProductService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
