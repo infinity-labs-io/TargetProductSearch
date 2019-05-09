@@ -1,5 +1,7 @@
 using InfinityLabs.Target.ProductSearch.Api.Enums;
 using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace InfinityLabs.Target.ProductSearch.Api.Models
 {
@@ -7,6 +9,7 @@ namespace InfinityLabs.Target.ProductSearch.Api.Models
     {
 
         [BsonElement("currency_code")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public CurrencyCode CurrencyCode { get; set; }
 
         [BsonElement("value")]
