@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using InfinityLabs.Target.ProductSearch.Api.Models;
+using InfinityLabs.Target.ProductSearch.Api.Providers;
 using MongoDB.Driver;
 
 namespace InfinityLabs.Target.ProductSearch.Api.Services
@@ -9,13 +10,9 @@ namespace InfinityLabs.Target.ProductSearch.Api.Services
     {
         private readonly IMongoCollection<PricingInformation> _pricing;
         
-        public MongoPricingService(IMongoConfiguration configuration)
+        public MongoPricingService(IMongoProvider provider)
         {
-            var connectionString = configuration.ConnectionString;
-            var dbName = configuration.DatabaseName;
-            var client = new MongoClient(connectionString);
-            var database = client.GetDatabase(dbName);
-            _pricing = database.GetCollection<PricingInformation>("Pricing");
+            _pricing = provider.GetCollection<PricingInformation>("Pricing");
 
         }
         

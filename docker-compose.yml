@@ -5,7 +5,8 @@ services:
       context: .
       dockerfile: src/Services/InfinityLabs.Target.ProductSearch.Api/Dockerfile
     environment: 
-      Mongo__ConnectionString: "mongodb://mongo:27017"
+      Mongo__ConnectionString: "mongodb://root:example@mongo:27017"
+      ASPNETCORE_ENVIRONMENT: "Development"
     ports: 
       - 8080:80
       - 8081:443

@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using InfinityLabs.Target.ProductSearch.Api.Extensions;
 using InfinityLabs.Target.ProductSearch.Api.Models;
+using InfinityLabs.Target.ProductSearch.Api.Providers;
+using InfinityLabs.Target.ProductSearch.Api.Seeders;
 using InfinityLabs.Target.ProductSearch.Api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,7 +13,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Infinitylabs.Target.ProductSearch.Api
+namespace InfinityLabs.Target.ProductSearch.Api
 {
     public class Startup
     {
@@ -33,11 +36,15 @@ namespace Infinitylabs.Target.ProductSearch.Api
                 .AddSingleton<IRedSkyConfiguration>(redSkyConfig);
             
             services
+                .AddScoped<IMongoProvider, MongoProvider>()
                 .AddScoped<IPricingService, MongoPricingService>()
                 .AddScoped<IProductPricingService, ProductPricingService>()
                 .AddScoped<IProductService, RedSkyProductService>();
 
             services
+                .AddSeeders(options => {
+                    options.AddSeeder<PricingSeeder>();
+                })
                 .AddMvc();
         }
 

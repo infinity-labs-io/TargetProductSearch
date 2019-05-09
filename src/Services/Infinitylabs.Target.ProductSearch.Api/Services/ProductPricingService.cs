@@ -27,7 +27,8 @@ namespace InfinityLabs.Target.ProductSearch.Api.Services
             return new ProductPricingAggregate()
             {
                 Id = id,
-                Name = productResult.Name
+                Name = productResult.Name,
+                CurrentPrice = pricingResult
             };
         }
     }
