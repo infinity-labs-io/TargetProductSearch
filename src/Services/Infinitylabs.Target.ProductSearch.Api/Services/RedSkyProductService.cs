@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using InfinityLabs.Target.ProductSearch.Api.Exceptions;
 using InfinityLabs.Target.ProductSearch.Api.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -30,9 +31,8 @@ namespace InfinityLabs.Target.ProductSearch.Api.Services
                 var data = await response.Content.ReadAsStringAsync();
                 return deserialize(data);
             }
-            // TODO: Throw better error
             var message = response.RequestMessage.RequestUri.ToString() + "\n" + response.ToString();
-            throw new InvalidOperationException(message);
+            throw new ProductNotFoundException(message);
         }
 
         private ProductInformation deserialize(string data) {
