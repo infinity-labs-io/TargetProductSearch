@@ -2,6 +2,6 @@ namespace InfinityLabs.Target.ProductSearch.Api.Models
 {
     public interface IRedSkyConfiguration
     {
-        string BaseUrl { get; set; }
+        string BaseAddress { get; set; }
     }
 }
