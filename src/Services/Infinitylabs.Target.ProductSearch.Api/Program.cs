@@ -20,7 +20,7 @@ namespace InfinityLabs.Target.ProductSearch.Api
             var host = CreateWebHostBuilder(args).Build();
             
             host.SeedDatabaseAsync()
-                .Wait(10000);
+                .Wait(30000);
             
             host.Run();
         }
