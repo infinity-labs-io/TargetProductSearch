@@ -31,8 +31,7 @@ namespace InfinityLabs.Target.ProductSearch.Api.Services
                 var data = await response.Content.ReadAsStringAsync();
                 return deserialize(data);
             }
-            var message = response.RequestMessage.RequestUri.ToString() + "\n" + response.ToString();
-            throw new ProductNotFoundException(message);
+            throw new ProductNotFoundException(id);
         }
 
         private ProductInformation deserialize(string data) {

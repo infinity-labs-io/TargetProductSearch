@@ -22,7 +22,7 @@ namespace InfinityLabs.Target.ProductSearch.Api.Services
             var pricing = await _pricing.Find(p => p.Id == id).FirstOrDefaultAsync();
             if (pricing == null)
             {
-                throw new PricingNotFoundException("No pricing exists for id '{id}'.");
+                throw new PricingNotFoundException(id);
             }
             return pricing;
         }

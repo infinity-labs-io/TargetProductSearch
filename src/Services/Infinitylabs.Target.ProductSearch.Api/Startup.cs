@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using InfinityLabs.Target.ProductSearch.Api.Extensions;
+using InfinityLabs.Target.ProductSearch.Api.Middleware;
 using InfinityLabs.Target.ProductSearch.Api.Models;
 using InfinityLabs.Target.ProductSearch.Api.Providers;
 using InfinityLabs.Target.ProductSearch.Api.Seeders;
@@ -54,6 +55,8 @@ namespace InfinityLabs.Target.ProductSearch.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseMvc(routes => {
                 routes.MapRoute("default", "api/*");
