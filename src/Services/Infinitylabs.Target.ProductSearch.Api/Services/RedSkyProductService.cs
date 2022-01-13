@@ -27,7 +27,7 @@ namespace InfinityLabs.Target.ProductSearch.Api.Services
         
         public async Task<ProductInformation> GetByIdAsync(int id)
         {
-            if (id == -1)
+            if (id < 10000000)
             {
                 throw new ArgumentOutOfRangeException($"Id '{id}' is invalid.");
             }
