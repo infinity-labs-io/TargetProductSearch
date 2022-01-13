@@ -4,21 +4,32 @@ using System.Threading.Tasks;
 using InfinityLabs.Target.ProductSearch.Api.Enums;
 using InfinityLabs.Target.ProductSearch.Api.Models;
 using InfinityLabs.Target.ProductSearch.Api.Providers;
+using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 
 namespace InfinityLabs.Target.ProductSearch.Api.Seeders
 {
     public class PricingSeeder : MongoSeederBase<PricingInformation>
     {
-        public PricingSeeder(IMongoProvider provider) 
-            : base("Pricing", provider)
+        public PricingSeeder(IMongoProvider provider, ILogger<PricingSeeder> logger) 
+            : base("Pricing", provider, logger)
         {
         }
 
         protected override async Task SeedAsync(IMongoCollection<PricingInformation> collection)
         {
+            await Task.WhenAll(
+                new [] {
+                    SeedRangeAsync(collection, 13000000, 1000000),
+                    SeedRangeAsync(collection, 54000000, 400000)
+                }
+            );
+        }
+
+        private async Task SeedRangeAsync(IMongoCollection<PricingInformation> collection, int startIndex, int count)
+        {
             var rand = new Random();
-            var range = Enumerable.Range(13860000, 1000)
+            var range = Enumerable.Range(startIndex, count)
                 .Select(id => {
                     return new PricingInformation() {
                         Id = id,

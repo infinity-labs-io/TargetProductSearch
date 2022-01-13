@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 using InfinityLabs.Target.ProductSearch.Api.Extensions;
 using InfinityLabs.Target.ProductSearch.Api.Middleware;
 using InfinityLabs.Target.ProductSearch.Api.Models;
@@ -10,9 +7,9 @@ using InfinityLabs.Target.ProductSearch.Api.Seeders;
 using InfinityLabs.Target.ProductSearch.Api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace InfinityLabs.Target.ProductSearch.Api
 {
@@ -32,9 +29,13 @@ namespace InfinityLabs.Target.ProductSearch.Api
             _configuration.Bind("Mongo", config);
             _configuration.Bind("RedSky", redSkyConfig);
 
+            var authSecret = new AuthSecrets();
+            _configuration.Bind("auth", authSecret);
+
             services
                 .AddSingleton<IMongoConfiguration>(config)
-                .AddSingleton<IRedSkyConfiguration>(redSkyConfig);
+                .AddSingleton<IRedSkyConfiguration>(redSkyConfig)
+                .AddSingleton<IAuthentication>(authSecret);
             
             services
                 .AddScoped<IMongoProvider, MongoProvider>()
@@ -46,20 +47,23 @@ namespace InfinityLabs.Target.ProductSearch.Api
                 .AddSeeders(options => {
                     options.AddSeeder<PricingSeeder>();
                 })
-                .AddMvc();
+                .AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            
             app.UseMiddleware<ExceptionMiddleware>();
-
-            app.UseMvc(routes => {
-                routes.MapRoute("default", "api/*");
+            app.UseRouting();
+            app.UseEndpoints(endpoints => {
+                endpoints.MapControllers();
             });
         }
     }

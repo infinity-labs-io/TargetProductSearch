@@ -28,6 +28,7 @@ namespace InfinityLabs.Target.ProductSearch.Api.Services
             {
                 Id = id,
                 Name = productResult.Name,
+                Description = productResult.Description,
                 CurrentPrice = pricingResult
             };
         }

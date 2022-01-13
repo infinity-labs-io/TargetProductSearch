@@ -9,7 +9,6 @@ namespace InfinityLabs.Target.ProductSearch.Api.Models
     {
 
         [BsonElement("currency_code")]
-        [JsonConverter(typeof(StringEnumConverter))]
         public CurrencyCode CurrencyCode { get; set; }
 
         [BsonElement("value")]

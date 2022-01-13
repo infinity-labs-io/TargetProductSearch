@@ -6,15 +6,33 @@ A product aggregation service that unifies catelog and pricing information.
 
 - Docker
 
-# Basic Usage
+# Usage
 
-Should be as easy as 1..2..3. No seriously.
+## Secrets
 
-    docker-compose up
+In the root project directory 
+
+ie: `src/Services/Infinitylabs.Target.ProductSearch.Api/`
+
+Create a new file titled `secrets.json` and replace `xxx` with the RedSky API key:
+```
+{
+  "auth": {
+    "RedSkyApiKey": "xxx"
+  }
+}
+```
+
+## Running
+
+
+A simple `docker-compose up` command will build and run the project.
 
 The following endpoint will allow you to fetch aggregated data using a product id. Try out the sample id `13860428`.
 
     http://localhost:8080/api/products/{id}
+
+`Not all TCINs are seeded in the DB. See 'PricingSeeder.cs'`
 
 You may also PUT updated pricing information in the MongoDB by changing the HTTP method above from GET to PUT.
 The body will be JSON and will replace the document stored in Mongo. JSON scheme below:

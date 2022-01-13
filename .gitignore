@@ -349,3 +349,5 @@ MigrationBackup/
 
 # Apple Indicies
 .DS_Store
+
+secrets*
