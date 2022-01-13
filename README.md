@@ -49,3 +49,6 @@ The docker-compose.yml file includes three services:
 - An AspNetCore web application
     - Sample Url: [http://localhost:8080/api/products/13860428](http://localhost:8080/api/products/13860428)
     - Ports: `8080` and `8081` (http and https respectively)
+
+## Notes + Recommendations
+[Wiki](https://github.com/infinity-labs-io/TargetProductSearch/wiki/Improvements)
