@@ -10,11 +10,8 @@ A product aggregation service that unifies catelog and pricing information.
 
 ## Secrets
 
-In the root project directory 
-
-ie: `src/Services/Infinitylabs.Target.ProductSearch.Api/`
-
-Create a new file titled `secrets.json` and replace `xxx` with the RedSky API key:
+1. Navigate to `src/Services/Infinitylabs.Target.ProductSearch.Api/`
+1. Create a new file titled `secrets.json` and replace `xxx` with the RedSky API key:
 ```
 {
   "auth": {
@@ -25,8 +22,8 @@ Create a new file titled `secrets.json` and replace `xxx` with the RedSky API ke
 
 ## Running
 
-
-A simple `docker-compose up` command will build and run the project.
+1. Navigate to the root project directory where the `docker-compose.yml` file is located.
+1. Run the `docker-compose up` command.
 
 The following endpoint will allow you to fetch aggregated data using a product id. Try out the sample id `13860428`.
 
